@@ -1,0 +1,64 @@
+.Wrapper {
+    background: url("https://i.ibb.co/GQ42gs6/Your-present-circumstances-don-t-determine-where-you-go-they-merely-determine-where-you-start-2.png");
+    font-size: x-large;
+    @media screen and (max-width: 1200px) {
+      background: #fdeccd;
+    }
+  
+    .Inside {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 100px;
+    
+  
+      @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .quotes {
+        text-align: center;
+        flex: 9;
+        margin-left: 90px;
+        margin-bottom: 40px;
+        display: flex;
+        
+        color: #f4906e;
+        width: 70%;
+        @media screen and (max-width: 1200px) {
+          flex: 12;
+          margin-left: 0;
+          font-size: small;
+          margin-bottom: 0;
+        }
+      }
+      .buttons {
+       
+        margin-left: 8%;
+        width: 250px;
+        @media screen and (max-width: 1200px) {
+          flex: 12;
+          margin-left: 0;
+          width: 50%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+  
+        button {
+          
+          padding: 5%;
+          background-color: #f4906e;
+          color: white;
+          border: 0;
+          border-radius: 10px;
+          cursor: pointer;
+  
+          @media screen and (max-width: 1200px) {
+            padding: 2%;
+            font-size: medium;
+          }
+        }
+      }
+    }
+  }

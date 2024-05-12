@@ -1,0 +1,14 @@
+.Second_container {
+    //   background: url("../../assets/bg_custom.svg");
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 100px;
+  
+    .rightSecond {
+      text-align: center;
+      margin: auto 0;
+      padding: 150px;
+      font-size: 20px;
+    }
+  }

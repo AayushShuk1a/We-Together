@@ -1,0 +1,34 @@
+.random {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    overflow: hidden;
+    justify-content: center;
+  }
+  .main_div {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background: url("../../assets/Frame_3_1.svg");
+    
+  }
+  .heading1_Video {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(35, 53, 80);
+    margin-bottom: 3rem;
+    margin-top: 15px;
+  }
+  .heading2_Video {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(240, 189, 157);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
