@@ -8,6 +8,7 @@ import Login from "./Pages/Login";
 import Error from "./Pages/Error";
 import { useContext } from "react";
 import { AuthContext } from "./Components/AuthContext/AuthContext";
+import Chats from "./Components/Chats/Chats";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -31,6 +32,8 @@ function App() {
         path="/login"
         element={!user ? <Login /> : <Navigate to="/dashboard" />}
       ></Route>
+
+     
 
       {user && (
         <>

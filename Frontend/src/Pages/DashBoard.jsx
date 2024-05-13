@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import Chat from "../Components/Chat";
-import Name from "../Components/Name";
+
 import LobbyScreen from "../Components/VideoCall/Lobby";
 import MentorDetail from "../Components/Mentors/MentorDetail";
 import MentorCard from "../Components/Mentors/MentorCard";
@@ -10,6 +9,7 @@ import ArticleDetail from "../Components/Articles/ArticleDetail";
 import UserProfile from "../Components/UserProfile/UserProfile";
 import { Logout } from "../Components/AuthContext/AuthActions";
 import { AuthContext } from "../Components/AuthContext/AuthContext";
+import Chats from "../Components/Chats/Chats";
 
 const mentor = [
   {
@@ -103,6 +103,7 @@ const DashBoard = () => {
 
   const { dispatch } = useContext(AuthContext);
 
+const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogOutClick=async()=>{
     localStorage.removeItem("user");
@@ -448,19 +449,11 @@ const DashBoard = () => {
 
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-          {chatView && (
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div className="col-span-1 w-[76rem]">
-                <Name />
-              </div>
-              <div className="col-span-1">
-                {" "}
-                <Chat />
-              </div>
-            </div>
+          {chatView && storedUser&&(
+           <Chats/>
           )}
 
-          {callView && (
+          {callView  && (
             <div class="grid grid-cols-1 gap-4 mb-4">
               <div className="">
                 <LobbyScreen />
