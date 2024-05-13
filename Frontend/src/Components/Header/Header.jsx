@@ -19,7 +19,7 @@ const Header = () => {
         <div className={styles.logout}>
           <button
             onClick={() => {
-              navigate("/auth");
+              navigate("/login");
             }}
             className={styles.logoutButton}
           >
@@ -51,7 +51,7 @@ const Header = () => {
         {/* <div id={styles.test}>Testing</div> */}
         <button
           onClick={() => {
-            navigate("/auth");
+            navigate("/register");
           }}
           className={styles.getStarted}
         >

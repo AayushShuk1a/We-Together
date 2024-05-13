@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Chat from "../Components/Chat";
 import Name from "../Components/Name";
 import LobbyScreen from "../Components/VideoCall/Lobby";
@@ -8,6 +8,8 @@ import Articles from "../Components/Articles/Articles";
 import { useNavigate } from "react-router-dom";
 import ArticleDetail from "../Components/Articles/ArticleDetail";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import { Logout } from "../Components/AuthContext/AuthActions";
+import { AuthContext } from "../Components/AuthContext/AuthContext";
 
 const mentor = [
   {
@@ -99,8 +101,12 @@ const DashBoard = () => {
 
   const navigate=useNavigate();
 
+  const { dispatch } = useContext(AuthContext);
 
-  const handleLogOutClick=()=>{
+
+  const handleLogOutClick=async()=>{
+    localStorage.removeItem("user");
+    dispatch(Logout());
     navigate("/")
   }
 

@@ -1,5 +1,27 @@
-const { Server } = require("socket.io");
-const http = require("http");
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { Server } from "socket.io";
+import http from "http";
+import connection from "./database/db.js";
+import Router from "./Router/UserRoute.js";
+import { errorHandler } from "./Middleware/ErrorHandler.js";
+
+
+dotenv.config();
+const app=express();
+app.use(cors());
+
+
+
+app.use(express.json());
+
+app.use("/", Router);
+
+
+app.use(errorHandler);
+
+
 
 const server = http.createServer();
 const io = new Server(server, {
@@ -44,3 +66,9 @@ const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+app.listen(8080, () => {
+  console.log("Server is Running");
+});
+
+connection();
