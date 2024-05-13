@@ -11,10 +11,10 @@ const Header = () => {
         <div className={styles.logo}>We Together</div>
 
         <div className={styles.lists}>
-          <div className={styles.item}>Home</div>
-          <div className={styles.item}>Inspiration</div>
-          <div className={styles.item}>Quotes</div>
-          <div className={styles.item}>Footer</div>
+        <div className={styles.item}><a href="#">Home</a></div>
+<div className={styles.item}><a href="#">Inspiration</a></div>
+<div className={styles.item}><a href="#">Quotes</a></div>
+<div className={styles.item}><a href="#">Footer</a></div>
         </div>
         <div className={styles.logout}>
           <button

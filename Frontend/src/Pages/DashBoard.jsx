@@ -2,24 +2,188 @@ import React, { useState } from "react";
 import Chat from "../Components/Chat";
 import Name from "../Components/Name";
 import LobbyScreen from "../Components/VideoCall/Lobby";
+import MentorDetail from "../Components/Mentors/MentorDetail";
+import MentorCard from "../Components/Mentors/MentorCard";
+import Articles from "../Components/Articles/Articles";
+import { useNavigate } from "react-router-dom";
+import ArticleDetail from "../Components/Articles/ArticleDetail";
+import UserProfile from "../Components/UserProfile/UserProfile";
+
+const mentor = [
+  {
+    name: "Dr. John Doe",
+    price: "$100",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+    imageUrl:
+      "https://thumbs.dreamstime.com/b/smiling-indian-man-looking-camera-mature-wearing-spectacles-portrait-middle-eastern-confident-businessman-office-195195079.jpg",
+  },
+  {
+    name: "Dr. Jane Smith",
+    price: "$120",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+    imageUrl:
+      "https://media.istockphoto.com/id/1319763830/photo/portrait-of-smiling-mixed-race-woman-looking-at-camera.jpg?s=612x612&w=0&k=20&c=L0d04sc89UuLW0G80UCu4egl0tQwyl8PLKsIZotbP_U=",
+  },
+  {
+    name: "Dr. Mark Johnson",
+    price: "$90",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+    imageUrl:
+      "https://thumbs.dreamstime.com/b/smiling-years-old-middle-aged-business-man-standing-office-portrait-confident-older-bank-manager-investor-mid-adult-290494487.jpg",
+  },
+  {
+    name: "Dr. Sarah Brown",
+    price: "$110",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+    imageUrl:
+      "https://dq1eylutsoz4u.cloudfront.net/2017/01/30135945/women-in-their-40s1.jpg",
+  },
+  {
+    name: "Dr. Michael Wilson",
+    price: "$95",
+    details:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+    imageUrl:
+      "https://t3.ftcdn.net/jpg/03/96/78/06/360_F_396780640_mO95sH5ITG2sD3RdOd7fh3olapEkupXW.jpg",
+  },
+];
+
+
+const article = [
+  {
+      name: "Meera Iyer",
+      title: "Embracing Vulnerability: The Path to Healing and Connection",
+      details: "Discover the transformative power of vulnerability in fostering deep connections and resilience. Join us as we celebrate the courage it takes to share our truths and create a safe space where every voice is valued." ,
+      imageUrl:"https://images.pexels.com/photos/6134922/pexels-photo-6134922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+      name: "Jane Smith",
+      title: "Self-Care Sanctuary: Nurturing Your Mind, Body, and Soul",
+      details: "Step into our sanctuary for self-care and embark on a journey to nurture your well-being. From mindfulness techniques to nourishing your body and fostering meaningful connections, prioritize yourself as you walk the path towards healing and wholeness. Your journey to self-care starts here.",
+      imageUrl: "https://images.pexels.com/photos/8692129/pexels-photo-8692129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+      name: "Aarav Sharma",
+      title: "Healing Through Creativity: Expressive Arts as a Path to Wholeness",
+      details: "Unleash the transformative power of creativity in your healing journey. Dive into expressive arts, whether painting, music, or writing, to illuminate your inner world and foster emotional resilience. Join us in discovering the therapeutic potential of creativity as a tool for self-expression and growth.",
+      imageUrl: "https://images.pexels.com/photos/3771079/pexels-photo-3771079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+      name: "Sarah Brown",
+      title: "Cultivating Compassion: The Heart of Our Community",
+      details: "Compassion is the heartbeat of our community, fostering connection and understanding. Embrace self-compassion, practice empathy in communication, and spread acts of kindness to create a supportive environment for all. Together, let's cultivate a culture of compassion and belonging.",
+      imageUrl: "https://images.pexels.com/photos/7176302/pexels-photo-7176302.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+      name: "Michael Wilson",
+      title: "Weathering Life's Storms: Building Resilience in Times of Adversity",
+      details: "Discover the art of resilience and find strength in life's challenges. Embrace change, cultivate optimism, and foster community connections to navigate storms with courage and grace. Join us in empowering yourself to rise above adversity and emerge stronger than ever before.",
+      imageUrl: "https://media.licdn.com/dms/image/D4E12AQGcyRWSicgz1Q/article-cover_image-shrink_720_1280/0/1672716076034?e=2147483647&v=beta&t=hN7RWYXTfZCBoqYeRqsEP8Slt4UjbkWrYG17XkOKyX0",
+    },
+];
 
 const DashBoard = () => {
- const [chatView,SetChatView]= useState(false);
- const [callView,SetCallView]= useState(false);
- const [MentorView,SetMentorView]= useState(false);
+  const [chatView, SetChatView] = useState(true);
+  const [callView, SetCallView] = useState(false);
+  const [MentorView, SetMentorView] = useState(false);
+  const [MentorDetailView, SetMentorDetailView] = useState(false);
+  const [ArticleView, SetArticleView] = useState(false);
+  const [selectedMentor, setSelectedMentor] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [ArticleDetailView, SetArticleDetailView] = useState(false);
+  const [userProfileView, SetuserProfileView] = useState(false);
+
+  const navigate=useNavigate();
 
 
- const handleMeetingClick=()=>{
-  SetCallView(true);
-  SetChatView(false);
-  SetMentorView(false);
- }
+  const handleLogOutClick=()=>{
+    navigate("/")
+  }
 
- const handleChatClick=()=>{
-  SetChatView(true);
-  SetCallView(false);
-  SetMentorView(false);
- }
+  const handleMeetingClick = () => {
+    SetCallView(true);
+    SetChatView(false);
+    SetMentorView(false);
+    SetMentorDetailView(false);
+    SetArticleView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+  };
+
+  const handleChatClick = () => {
+    SetChatView(true);
+    SetCallView(false);
+    SetMentorView(false);
+    SetMentorDetailView(false);
+    SetArticleView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+  };
+
+  const handleMentorClick = () => {
+    SetChatView(false);
+    SetCallView(false);
+    SetMentorView(true);
+    SetMentorDetailView(false);
+    SetArticleView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+  };
+
+  const handleCardClick = (mentor) => {
+    setSelectedMentor(mentor);
+    SetMentorDetailView(true);
+    SetArticleView(false);
+    SetChatView(false);
+    SetCallView(false);
+    SetMentorView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+  };
+
+  const handleArticleClick = () => {
+    SetMentorDetailView(false);
+    SetArticleView(true);
+    SetChatView(false);
+    SetCallView(false);
+    SetMentorView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+  };
+
+  const handleArticleCardClick = (article) => {
+    setSelectedArticle(article);
+    SetMentorDetailView(false);
+    SetArticleView(false);
+    SetChatView(false);
+    SetCallView(false);
+    SetMentorView(false);
+    SetArticleDetailView(true);
+    SetuserProfileView(false);
+  };
+
+  const handleProfileClick = () => {
+    setSelectedArticle(article);
+    SetMentorDetailView(false);
+    SetArticleView(false);
+    SetChatView(false);
+    SetCallView(false);
+    SetMentorView(false);
+    SetArticleDetailView(false);
+    SetuserProfileView(false);
+    SetuserProfileView(true);
+  };
+
+  
+
+  
+
+
+
 
   return (
     <div>
@@ -49,7 +213,7 @@ const DashBoard = () => {
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" class="flex ms-2 md:me-24">
+              <a href="/" class="flex ms-2 md:me-24">
                 <img
                   src="https://flowbite.com/docs/images/logo.svg"
                   class="h-8 me-3"
@@ -71,6 +235,7 @@ const DashBoard = () => {
                   >
                     <span class="sr-only">Open user menu</span>
                     <img
+                    onClick={handleProfileClick}
                       class="w-8 h-8 rounded-full"
                       src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                       alt="user photo"
@@ -147,46 +312,11 @@ const DashBoard = () => {
       >
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul class="space-y-2 font-medium">
+          
+
             <li>
               <a
-                href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 22 21"
-                >
-                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                </svg>
-                <span class="ms-3">Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 18"
-                >
-                  <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
-                </svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
-                <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                  Pro
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
+                onClick={handleChatClick}
                 href="#"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -199,7 +329,7 @@ const DashBoard = () => {
                 >
                   <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
                 </svg>
-                <span onClick={handleChatClick} class="flex-1 ms-3 whitespace-nowrap">Chats</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Chats</span>
                 <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                   3
                 </span>
@@ -207,6 +337,7 @@ const DashBoard = () => {
             </li>
             <li>
               <a
+                onClick={handleMentorClick}
                 href="#"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -224,6 +355,7 @@ const DashBoard = () => {
             </li>
             <li>
               <a
+                onClick={handleMeetingClick}
                 href="#"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -236,11 +368,52 @@ const DashBoard = () => {
                 >
                   <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
                 </svg>
-                <span onClick={handleMeetingClick} class="flex-1 ms-3 whitespace-nowrap">Meetings</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Meetings</span>
               </a>
             </li>
+
             <li>
               <a
+              onClick={handleArticleClick}
+                href="#"
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg
+                  class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 18"
+                >
+                  <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">Articles</span>
+              </a>
+            </li>
+
+
+            <li>
+              <a
+              onClick={handleProfileClick}
+                href="#"
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg
+                  class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 18"
+                >
+                  <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+              onClick={handleLogOutClick}
                 href="#"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -259,56 +432,81 @@ const DashBoard = () => {
                     d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
                   />
                 </svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-                </svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-              </a>
-            </li>
+           
           </ul>
         </div>
       </aside>
 
       <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-          {chatView&&<div class="grid grid-cols-2 gap-4 mb-4">
-            <div className="col-span-1 w-[80rem]">
-              <Name />
+          {chatView && (
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div className="col-span-1 w-[76rem]">
+                <Name />
+              </div>
+              <div className="col-span-1">
+                {" "}
+                <Chat />
+              </div>
             </div>
-            <div className="col-span-1">
-              {" "}
-              <Chat />
+          )}
+
+          {callView && (
+            <div class="grid grid-cols-1 gap-4 mb-4">
+              <div className="">
+                <LobbyScreen />
+              </div>
             </div>
-          </div>}
+          )}
 
-          {callView&&<div class="grid grid-cols-1 gap-4 mb-4">
-            <div className="">
-              <LobbyScreen />
+          {ArticleView && (
+            <div class="grid grid-cols-1 gap-4 mb-4">
+              <div className="">
+               {article.map((article,index)=>(<div key={index} onClick={() => handleArticleCardClick(article)}>
+                  <Articles item={article} />
+                </div>))}
+              </div>
             </div>
-            
-          </div>}
+          )}
 
 
-        
+{ArticleDetailView && (
+            <div class="grid grid-cols-1 gap-4 mb-4">
+              <div className="">
+                <ArticleDetail article={selectedArticle} />
+              </div>
+            </div>
+          )}
 
-          
 
+{userProfileView && (
+            <div class="grid grid-cols-1 gap-4 mb-4 flex items-center">
+              <div className="">
+                <UserProfile />
+              </div>
+            </div>
+          )}
+
+          {MentorView && (
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-4">
+              {mentor.map((mentor, index) => (
+                <div key={index} onClick={() => handleCardClick(mentor)}>
+                  <MentorCard item={mentor} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {MentorDetailView && (
+            <div class="grid grid-cols-1 gap-4 mb-4">
+              <div className="">
+                <MentorDetail mentor={selectedMentor} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
