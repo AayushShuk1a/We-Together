@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSocket } from "./SocketProvider";
 import RoomPage from "./Room";
 
-const LobbyScreen = () => {
+const LobbyScreen = ({user}) => {
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
   const [joined, setJoined] = useState(false);
@@ -49,11 +49,11 @@ const LobbyScreen = () => {
       <h1 className="text-3xl font-bold mb-4">Lobby</h1>
       <form onSubmit={handleSubmitForm} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-lg font-semibold mb-1">Email ID</label>
+          <label htmlFor="email" className="block text-lg font-semibold mb-1">Username</label>
           <input
-            type="email"
+            type="text"
             id="email"
-            value={email}
+            value={user.username}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
           />

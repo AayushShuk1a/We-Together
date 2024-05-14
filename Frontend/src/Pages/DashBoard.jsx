@@ -473,7 +473,7 @@ const storedUser = JSON.parse(localStorage.getItem("user"));
           {callView  && (
             <div class="grid grid-cols-1 gap-4 mb-4">
               <div className="">
-                <LobbyScreen />
+                <LobbyScreen user={storedUser}/>
               </div>
             </div>
           )}
