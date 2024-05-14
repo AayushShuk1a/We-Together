@@ -24,18 +24,16 @@ const Footer = () => {
                 <rect x="14" y="1" width="7" height="6" />
                 <rect x="14" y="11" width="7" height="12" />
               </svg>
-              <span className="ml-2 text-xl font-bold tracking-wide uppercase">
-                Company
+              <span className="ml-2 text-xl font-bold tracking-wide">
+                WeTogether
               </span>
             </a>
             <div className="mt-6 lg:max-w-sm">
               <p className="text-sm ">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam.
+              We're a community support platform, here to help each other.
               </p>
               <p className="mt-4 text-sm ">
-                Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                beatae vitae dicta sunt explicabo.
+              Together, we tackle challenges and celebrate success. Join us in this journey!"
               </p>
             </div>
           </div>

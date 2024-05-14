@@ -14,45 +14,62 @@ import Chats from "../Components/Chats/Chats";
 const mentor = [
   {
     name: "Dr. John Doe",
+    designation: "Substance Abuse Counselor",
     price: "$100",
+    email: "john.doe@example.com",
+    certificates: ["Certified Substance Abuse Counselor", "Licensed Professional Counselor"],
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+      "Specializing in helping individuals overcome drug addiction and substance abuse issues. Providing therapy and support to achieve lasting recovery and wellness.",
     imageUrl:
       "https://thumbs.dreamstime.com/b/smiling-indian-man-looking-camera-mature-wearing-spectacles-portrait-middle-eastern-confident-businessman-office-195195079.jpg",
   },
   {
     name: "Dr. Jane Smith",
+    designation: "Licensed Therapist",
     price: "$120",
+    email: "jane.smith@example.com",
+    certificates: ["Licensed Marriage and Family Therapist", "Certified Trauma Specialist"],
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+      "Experienced therapist offering support for various mental health challenges. Specializing in anxiety, depression, trauma, and relationship issues.",
     imageUrl:
       "https://media.istockphoto.com/id/1319763830/photo/portrait-of-smiling-mixed-race-woman-looking-at-camera.jpg?s=612x612&w=0&k=20&c=L0d04sc89UuLW0G80UCu4egl0tQwyl8PLKsIZotbP_U=",
   },
   {
     name: "Dr. Mark Johnson",
+    designation: "Mental Health Counselor",
     price: "$90",
+    email: "mark.johnson@example.com",
+    certificates: ["Licensed Professional Counselor", "Certified Clinical Mental Health Counselor"],
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+      "Offering compassionate mental health support and counseling. Specializing in stress management, self-esteem, and personal growth.",
     imageUrl:
       "https://thumbs.dreamstime.com/b/smiling-years-old-middle-aged-business-man-standing-office-portrait-confident-older-bank-manager-investor-mid-adult-290494487.jpg",
   },
   {
     name: "Dr. Sarah Brown",
+    designation: "Clinical Psychologist",
     price: "$110",
+    email: "sarah.brown@example.com",
+    certificates: ["Licensed Psychologist", "Certified Cognitive Behavioral Therapist"],
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+      "Experienced in providing therapy for a wide range of mental health issues. Specializing in depression, anxiety, PTSD, and relationship problems.",
     imageUrl:
       "https://dq1eylutsoz4u.cloudfront.net/2017/01/30135945/women-in-their-40s1.jpg",
   },
   {
     name: "Dr. Michael Wilson",
+    designation: "Psychiatrist",
     price: "$95",
+    email: "michael.wilson@example.com",
+    certificates: ["Board Certified Psychiatrist", "Licensed Physician"],
     details:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero ut mi pretium volutpat. Ut ut rhoncus lorem. Cras et enim ac eros laoreet sagittis.",
+      "Board-certified psychiatrist providing comprehensive mental health care. Specializing in medication management and therapy for various mental illnesses.",
     imageUrl:
       "https://t3.ftcdn.net/jpg/03/96/78/06/360_F_396780640_mO95sH5ITG2sD3RdOd7fh3olapEkupXW.jpg",
   },
 ];
+
+
 
 
 const article = [

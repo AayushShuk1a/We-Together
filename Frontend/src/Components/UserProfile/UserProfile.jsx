@@ -1,6 +1,8 @@
 import React from 'react'
 
 const UserProfile = () => {
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
          <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
@@ -37,7 +39,7 @@ const UserProfile = () => {
                                     first name</label>
                                 <input type="text" id="first_name"
                                     class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder="Your first name" value="Jane" required/>
+                                    placeholder="Your first name" value={storedUser.firstName} required/>
                             </div>
 
                             <div class="w-full">
@@ -46,7 +48,7 @@ const UserProfile = () => {
                                     last name</label>
                                 <input type="text" id="last_name"
                                     class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder="Your last name" value="Ferguson" required/>
+                                    placeholder="Your last name" value={storedUser.lastName} required/>
                             </div>
 
                         </div>
@@ -57,15 +59,15 @@ const UserProfile = () => {
                                 email</label>
                             <input type="email" id="email"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                placeholder="your.email@mail.com" required/>
+                                placeholder="your.email@mail.com" value={storedUser.email} required/>
                         </div>
 
                         <div class="mb-2 sm:mb-6">
                             <label for="profession"
-                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Profession</label>
+                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Username</label>
                             <input type="text" id="profession"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                placeholder="your profession" required/>
+                                placeholder="your profession" value={storedUser.username} required/>
                         </div>
 
                         <div class="mb-6">

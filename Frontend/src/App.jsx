@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes ,Navigate} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import Register from "./Pages/Register";
 import DashBoard from "./Pages/DashBoard";
@@ -14,13 +14,12 @@ function App() {
   const { user } = useContext(AuthContext);
   return (
     <Routes>
-    
-     
       <Route
         exact
         path="/"
-        element={user ? <Navigate to="/dashboard"/> : <Homepage/>}
+        element={user ? <Navigate to="/dashboard" /> : <Homepage />}
       ></Route>
+
       <Route
         exact
         path="/register"
@@ -33,13 +32,11 @@ function App() {
         element={!user ? <Login /> : <Navigate to="/dashboard" />}
       ></Route>
 
-     
-
-      {user && (
-        <>
-          <Route exact path="/dashboard" element={<DashBoard />}></Route>
-        </>
-      )}
+      <Route
+        exact
+        path="/dashboard"
+        element={user ? <DashBoard /> : <Navigate to="/" />}
+      ></Route>
     </Routes>
   );
 }

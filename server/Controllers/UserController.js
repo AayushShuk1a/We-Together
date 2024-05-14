@@ -12,6 +12,8 @@ const { sign } = jwt;
 export const RegisterPerson = async (req, res) => {
   console.log(req.body);
   const newUser = new User({
+    firstName:req.body.firstName,
+    lastName:req.body.lastName,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,

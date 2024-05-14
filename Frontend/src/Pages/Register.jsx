@@ -6,6 +6,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
 
   const navigate = useNavigate();
@@ -23,7 +25,9 @@ const Register = () => {
       const response = await axios.post('http://localhost:8080/api/auth/register', {
         username,
         password,
-        email
+        email,
+        firstName,
+        lastName
       });
       
       navigate("/login");
@@ -37,6 +41,16 @@ const Register = () => {
       <div className="max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md px-8 py-10 flex flex-col items-center">
         <h1 className="text-xl font-bold text-center text-gray-700 dark:text-gray-200 mb-8">SignUp</h1>
         <form action="#" className="w-full flex flex-col gap-4">
+
+        <div className="flex items-start flex-col justify-start">
+            <label htmlFor="username" className="text-sm text-gray-700 dark:text-gray-200 mr-2">First Name:</label>
+            <input onChange={(e) => { setFirstName(e.target.value); }} type="text" id="username" name="username" className="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+          </div>
+
+          <div className="flex items-start flex-col justify-start">
+            <label htmlFor="username" className="text-sm text-gray-700 dark:text-gray-200 mr-2">Last Name:</label>
+            <input onChange={(e) => { setLastName(e.target.value); }} type="text" id="username" name="username" className="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+          </div>
 
           <div className="flex items-start flex-col justify-start">
             <label htmlFor="username" className="text-sm text-gray-700 dark:text-gray-200 mr-2">Username:</label>

@@ -10,12 +10,7 @@ const Header = () => {
       <nav className={styles.mainNavbar}>
         <div className={styles.logo}>We Together</div>
 
-        <div className={styles.lists}>
-        <div className={styles.item}><a href="#">Home</a></div>
-<div className={styles.item}><a href="#">Inspiration</a></div>
-<div className={styles.item}><a href="#">Quotes</a></div>
-<div className={styles.item}><a href="#">Footer</a></div>
-        </div>
+      
         <div className={styles.logout}>
           <button
             onClick={() => {
